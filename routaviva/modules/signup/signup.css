@@ -1,0 +1,210 @@
+body{
+    background-color: rgb(245, 246, 248);
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.container{
+    margin: 10vh auto;
+    margin-left: 50px;
+    float: left;
+    background-color: transparent;
+    animation-name: move;
+    animation-timing-function: ease-in-out;
+    animation-duration: 2s;
+}
+.container h1{
+    margin: 0;
+
+}
+.next-page{
+    margin-top: 10px;
+}
+.next-page a{
+    margin-top: 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    color: blue;
+}
+.input-type{
+    margin-top: 20px;
+}
+.next-page{
+    display: flex;
+    text-align: center;
+}
+.input-type input{
+    margin-top: 5px;
+    font-size: 20px;
+    outline: 0;
+    border: 1px solid rgb(0, 0, 0);
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background: none;
+    width: 350px;
+    padding: 5px;
+}
+#username{
+    font-size: 20px;
+    display: flex;
+    margin: 0;   
+}
+#email{
+    font-size: 20px;
+    display: flex;
+    margin: 0;   
+}
+#password{
+    font-size: 20px;
+    display: flex;
+    margin: 0;   
+}
+#confirm-password{
+    font-size: 20px;
+    display: flex;
+    margin: 0;   
+}
+/*#button-input{
+    background-color: rgb(119, 156, 249);
+    border:1px solid rgb(119, 156, 249);
+    padding: 10px;
+    margin: 20px 0px;
+    width: 360px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+*/
+#button-input {
+    padding: 10px 155px;
+    border-radius: 5px;
+    color: white;
+    margin-top: 20px;
+    background-color: rgb(119, 156, 249);
+    font-size: 16px;
+    border: rgb(119, 156, 249);
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#button-input.loading {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#button-input.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-top: 2px solid #000;
+    border-radius: 30px;
+    margin-left: 10px;
+    animation: spin 1s linear infinite;
+}
+.input-type .error{
+    color: red;
+    font-size: 16px;
+    margin-top: 5px;
+}
+.mbox{
+    margin-left: 35%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: none;
+    animation-name: slider;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+.box1{
+    margin-top: 40px;
+    height: 990px;
+    width: 910px;
+    border: 5px solid rgb(180, 217, 254);
+    margin-left: 50px;
+    border-right: 0px;
+    border-bottom: 0px;
+    transform:rotate(10deg);
+}
+.box2{
+    margin: 70px;
+    height: 900px;
+    width: 820px;
+    border: 5px solid rgb(180, 217, 254);
+    margin-left: 100px; 
+    border-right: 0px;
+    border-bottom: 0px; 
+}
+.box3{
+    margin-top: 80px;
+    height: 800px;
+    width: 750px;
+    border: 5px solid rgb(180, 217, 254);
+    margin-left: 80px;   
+    border-right: 0px;
+    border-bottom: 0px;
+}
+
+
+@keyframes slider {
+    from{
+        transform: translateY(300%);
+    }
+    to{
+        transform: translateY(0%);
+    }
+}
+@keyframes move{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0;
+    }
+    60%{
+        opacity: 0;
+    }
+    70%{
+        opacity: 0.3;
+    }
+    80%{
+        opacity: 0.5;
+    }
+    90%{
+        opacity: 0.6;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px){
+    main{
+        flex-direction: column;
+    }
+    .container, .mbox{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+input-type .error input{
+    border-color: red;
+}
+
+input-type .success input{
+    border-color: #04f18e;
+}

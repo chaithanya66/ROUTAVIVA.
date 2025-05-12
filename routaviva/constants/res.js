@@ -1,0 +1,1 @@
+export let settings="assets\icons\icons_settings24.svg";

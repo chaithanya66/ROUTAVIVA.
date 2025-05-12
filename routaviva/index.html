@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .popup {
+    height: auto;
+    width:350px;
+    margin: 20vh auto;
+    display: flex;
+    background-color: #564e4e;
+    text-align: center;
+    box-shadow: 5px 5px 10px #000000;
+    padding: 20px;
+    display: none; /* Initially hidden */
+}
+.popup.active {
+    display: block; /* Show when active */
+}
+.popup #inputs{
+    text-align: center;
+    margin: 10vh auto;
+}
+#mailid-01{
+    outline: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1px solid #564e4e;
+    box-shadow: 5px 5px 10px #000000;
+}
+#button-01{
+    padding: 7px 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: 2px solid #000000;
+    background: none;
+    mix-blend-mode: lighten;
+}
+#toggleit{
+    background:none;
+    border-radius: 30px;
+    font-size: 25px;
+    height: 30px;
+    display: flex;
+    width: 30px;
+    border: 1px solid #000000;
+    cursor: pointer;
+}
+
+
+
+
+.count-2{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #18181B;
+    border-radius: 20px;
+    width: 600px;
+    text-align: center; 
+}
+.container-2{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.input-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #18181B;
+    margin-left: 20px;
+    color: white;
+}
+.container-2 button{
+    display: block;
+    background-color: #BEF264;
+    width: 110px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 0;
+}
+.count-2 .container-2{
+    background-color: #18181B;
+}
+.container-10{
+    background-color: red;
+    width: 600px;
+    display: inline-block;
+}
+.cont-10{
+    display: flex;
+    justify-content: space-between;
+}
+    </style>
+</head>
+<body>
+    <div id="popup" class="popup">
+        <button id="toggleit">&times;</button>
+        <div id="inputs">
+            <div id="textfeild"></div>
+            <input type="mail" placeholder="Enter the mail of colleagues" id="mailid-01"><br>
+            <button id="button-01"><img src="../../assets/images/addbut.png" alt=""></button>
+        </div>
+    </div>
+
+    <div class="count-2" >
+        <div class="container-2">
+            <div class="input-name">
+                <p id="changepara">who will be on trip</p>
+            </div>
+            <button id="button-2">Submit</button>
+        </div>
+    </div>
+
+    <div class="container-10">
+        <div class="cont-10">
+            <div class="para">
+                <p>who will be on trip</p>
+            </div>
+            <button>submit</button>
+        </div>
+    </div>
+
+    <script>
+        const popup=document.getElementById("popup");
+        document.getElementById("changepara").addEventListener('click',function(){
+            popup.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
+
+const submitbutton=document.getElementById("button-01");
+        const show=document.getElementById("textfeild");
+        const mailinput=document.getElementById("mailid-01");
+
+        submitbutton.addEventListener('click',function(){
+            const inputs=mailinput.value;
+            const newtext=document.createElement("div");
+            newtext.textContent=inputs;
+            newtext.style.color="white";
+            show.appendChild(newtext);
+            console.log(inputs);
+            newtext.style.marginBottom="20px";
+            mailinput.value="";
+    });
+    
+    const closetag=document.getElementById("toggleit");
+    closetag.addEventListener('click',function(){
+        const popup = document.getElementById("popup");
+        popup.style.display="none";
+        maintag.style.display="block";
+        document.getElementById("body").style.backgroundColor="white";
+    });

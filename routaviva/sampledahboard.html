@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travel Dashboard</title>
+  <style>
+    body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f7f7f7;
+  margin: 0;
+  padding: 20px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.header {
+  grid-column: span ;
+  background: linear-gradient(to right, #264653, #2a9d8f);
+  color: #fff;
+  padding: 30px;
+  border-radius: 14px;
+}
+
+.budget-chart {
+  display: flex;
+  margin-top: 10px;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #eee;
+}
+
+.budget-spent {
+  background: #f4a261;
+  color: #fff;
+  text-align: center;
+}
+
+.budget-left {
+  background: #2a9d8f;
+  color: #fff;
+  text-align: center;
+}
+
+.expenses ul, .packing ul, .destinations ul, .activities ul {
+  padding-left: 18px;
+  margin-top: 10px;
+}
+
+ul li {
+  margin: 6px 0;
+}
+
+.readiness {
+  background: #fcd34d;
+  color: #000;
+}
+
+.weather {
+  background: #dbeafe;
+}
+
+.flight {
+  background: #e9d5ff;
+}
+
+.packing {
+  background: #1f2937;
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+
+    <header class="header">
+      <h2>Welcome To Your Nepal Adventure!</h2>
+      <p>Hey Ashik! 👋</p>
+    </header>
+
+    <section class="card budget">
+      <h3>Budget</h3>
+      <p>Total: $1800</p>
+      <div class="budget-chart">
+        <div class="budget-spent" style="width: 30%;">30%</div>
+        <div class="budget-left" style="width: 70%;">70%</div>
+      </div>
+    </section>
+
+    <section class="card expenses">
+      <h3>Expenses</h3>
+      <ul>
+        <li>✈️ Air ticket - $230</li>
+        <li>🚕 Taxi rent - $10</li>
+        <li>🍔 King burger - $12</li>
+        <li>🥾 Trekking gear - $95</li>
+      </ul>
+    </section>
+
+    <section class="card readiness">
+      <h3>Readiness</h3>
+      <p>Days Left: <strong>17</strong></p>
+    </section>
+
+    <section class="card weather">
+      <h3>Kathmandu</h3>
+      <p>🌡️ Temp: 13°C (H: 10°, L: 14°)</p>
+      <p>🌥️ Mostly Cloudy</p>
+    </section>
+
+    <section class="card flight">
+      <h3>Flight</h3>
+      <p>📍 12 May, 2:30 PM - Dhaka to Kathmandu</p>
+      <p>📍 22 May, 9:30 AM - Kathmandu to Delhi</p>
+    </section>
+
+    <section class="card destinations">
+      <h3>Destinations</h3>
+      <ul>
+        <li>Kathmandu</li>
+        <li>Pokhara</li>
+        <li>Chitwan</li>
+        <li>Everest</li>
+      </ul>
+    </section>
+
+    <section class="card activities">
+      <h3>Days & Activity</h3>
+      <ul>
+        <li><strong>Day 1:</strong> Arrival in Kathmandu</li>
+        <li><strong>Day 2:</strong> Kathmandu Sightseeing</li>
+        <li><strong>Day 3:</strong> Bhaktapur and Nagarkot</li>
+      </ul>
+    </section>
+
+    <section class="card packing">
+      <h3>Packing List</h3>
+      <ul>
+        <li>🎒 Backpack</li>
+        <li>📸 Camera & GoPro</li>
+        <li>💻 Laptop & Charger</li>
+        <li>🔥 Hot water button</li>
+        <li>💊 Medical Aid</li>
+        <li>🧥 Winter Jacket</li>
+      </ul>
+    </section>
+
+  </div>
+</body>
+</html>

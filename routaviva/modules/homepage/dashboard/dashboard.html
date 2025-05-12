@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        #map {
+            height: 360px;
+            width: 345px;
+            border-radius: 16px;
+        }
+    </style>
+
+    <script src="dashboard.js" defer type="module"></script>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><img class="logoimg"
+                    src="../../../assets/images/WhatsApp_Image_2025-04-15_at_21.22.04_df1bfcaf-removebg-preview.png"
+                    alt="logo"></li>
+            <span>
+                <li><a href="" id="dashboard">Dashboard</a></li>
+                <li><a href="../newTrip/newtrip.html">YourTrips</a></li>
+            </span>
+            <li class="hoverit"><img src="../../../assets/icons/icons_settings24.svg" alt="*">
+                <ul class="dropdown">
+                    <!--  <li><a href="../signin/signin.html">Sign in</a></li>
+                    <li><a href="../signup/signup.html">Sign up</a></li>  -->
+                    <li><a href="../signin/signin.html">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="dashboardtemp">
+
+        <section class="sct1">
+            <div class="head">
+                <h1>Your Trip</h1>
+                <select id="select-places">
+                </select>
+            </div>
+
+            <div class="main1">
+                <h2>Hey Budy!</h2>
+                <h2 id="heading">Welcome To Your Nepal Adventure!</h2>
+            </div>
+
+        </section>
+
+        <section class="sct2">
+
+            <div class="head1">
+                <h1 class="head1-1">BUDGET</h1>
+            </div>
+
+            <div class="chart" id="piechartdis">
+                <canvas id="piechart" height="50" width="50"></canvas>
+            </div>
+
+            <div class="tripbudget">
+
+                <button id="add-budg"><img src="../../../assets/images/icons8-add-24.png" alt="">Add Budget</button>
+
+                <div class="display-budget">
+                    <div class="total-bdg">
+                        <label for="total-bdg-val">Total budget</label>
+                        <input type="range" name="total-bdg-val" min="1" value="500" max="100000" id="total-bdg-val">
+                        <div id="total-dis">0</div>
+                    </div>
+
+                    <div class="activity-bdg">
+                        <label for="activity-bdg-val">Activities</label>
+                        <input type="range" name="activity-bdg-val" min="1" value="500" max="500000"
+                            id="activity-bdg-val">
+                        <div id="activity-dis">0</div>
+                    </div>
+
+                    <div class="stay-bdg">
+                        <label for="stay-bdg-val">Stay</label>
+                        <input type="range" name="stay-bdg-val" min="1" value="500" max="500000" id="stay-bdg-val">
+                        <div id="stay-dis">0</div>
+                    </div>
+
+                    <div class="food-bdg">
+                        <label for="food-bdg-val">Food</label>
+                        <input type="range" name="food-bdg-val" min="1" value="500" max="500000" id="food-bdg-val">
+                        <div id="food-dis">0</div>
+                    </div>
+
+                    <button id="create-bdg"><img src="../../../assets/images/icons8-add-24.png" alt="">Create</button>
+
+                </div>
+
+            </div>
+
+
+
+        </section>
+
+        <section class="sct3">
+            <div class="head2">
+                <h1>EXPENSES</h1>
+            </div>
+
+            <div class="main3">
+                <button id="addexpnew"><img src="../../../assets/images/icons8-add-24.png" alt="+"> Record</button>
+
+                <div id="expenses-popup" class="expenses-popup">
+                    <div class="exp-content">
+                        <select name="expenses" id="exp-select">
+                            <option value="">Select</option>
+                            <option value="">Food</option>
+                            <option value="">Stay</option>
+                            <option value="">Activities</option>
+                            <option value="">Petrol</option>
+                        </select>
+
+                        <!-- <input type="text" name="" id="exp-cost"> -->
+                    </div>
+                    <button id="addexpenses">Add</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="sct4">
+
+            <div class="head3">
+                READINESS
+            </div>
+
+            <div class="main4">
+                <div id="dayleft">Days left</div>
+                <div id="days-left"></div>
+            </div>
+        </section>
+
+        <section class="sct5">
+
+            <div id="map"></div>
+
+        </section>
+
+        <section class="sct6">
+            <div class="head5">
+                <img src="../../../assets/images/icons8-location-64.png" alt="#">
+                <h1 id="citynamehtml"></h1>
+            </div>
+
+            <div class="main6">
+                <div class="temperature">
+                    <div class="temppara">Temperature</div>
+
+                    <div class="tempvalue"></div>
+                </div>
+                <div class="weather">
+                    <div class="weatherpara">Weather</div>
+
+                    <div class="weatherval"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sct7">
+
+        </section>
+
+        <section class="sct8">
+
+        </section>
+
+        <section class="sct9">
+
+        </section>
+
+    </div>
+
+    <input type="text" id="from" placeholder="From (lat,lng)" value="28.18369,76.8197" />
+    <input type="text" id="to" placeholder="To (lat,lng)" value="28.19143,76.81418" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://unpkg.com/@mapbox/polyline"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+HR+Lijeva:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+HR+Lijeva:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+#body{
+    background-color: white;
+    font-size: 1.5em;
+    overflow-x: hidden;
+    font-family: "Figtree", sans-serif;
+}
+.navbar ul{
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    list-style: none;
+    justify-content:space-between;
+    align-items: center;
+    columns: 400px;
+}
+.navbar ul span{
+    display: flex;
+    background-color: #edeaeb;
+    width: 300px;
+    border: 2px solid #ddd5d1;
+    height: 43px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 50px;
+    padding-left: 0px;
+    font-size: 20px;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color: black;
+}
+#dashboard{
+    background-color: #085f57;
+    border-radius: 40px;
+    padding: 7px 10px;
+    color: white;
+    top: 0;
+}
+/***
+#dashboard:hover{
+    background-color: #085f57;
+    color: white;
+    border-radius: 40px;
+    padding: 7px 10px;
+    top:0;
+    transition: background-color 0.5s ease-in-out;
+}
+***/
+.navbar ul span li{
+    margin-right: 50px;
+}
+.navbar ul span li a:active{
+    color: white;
+}
+.navbar ul span a:hover{
+    background-color: #085f57;
+    color: white;
+    border-radius: 40px;
+    padding: 7px 10px;
+    top:0;
+    transition: background-color 0.5s ease-in-out;
+}
+.hoverit{
+    margin-right: 65px;
+}
+.hoverit img{
+    font-size: 10px;
+}
+.hoverit .setting_button{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.navbar ul .dropdown{
+    display: block;
+    position: absolute;
+    padding: 0px 0px 0px;
+}
+.navbar ul .dropdown li{
+    padding: 0px;
+}
+.navbar ul .dropdown{
+    display: none;
+}
+.navbar ul .dropdown a{
+    color: black;
+}
+.hoverit:hover .dropdown{
+    display: block;
+}
+.navbar ul span #dashboard{
+    margin-left: 3px;
+}
+
+
+/*** Dasboard ***/
+
+.dashboardtemp{
+    margin-top: 50px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4,150px);
+    grid-template-columns: repeat(4,150px);
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 1400px;
+    grid-gap:20px 20px;
+}
+.dash2{
+    margin-top: 50px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,150px);
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 1400px;
+    grid-gap:20px 20px;
+}
+.dash3{
+    margin-top: 50px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4,150px);
+    grid-template-columns: repeat(4,150px);
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 1400px;
+    grid-gap:20px 20px;
+    float: left;
+}
+.sct1{
+    background-color: red;
+    border-radius: 16px;
+    width:250px;
+    height: 250px;
+   
+}
+
+.sct2{
+    background-color: rgb(48, 121, 143);
+    height: 250px;
+    width: 250px;
+    border-radius: 16px;
+}
+
+.sct3{
+    background-color: rgb(251, 255, 0);
+    height: 250px;
+    width: 250px;
+    border-radius: 16px;
+}
+
+.sct4{
+    background-color: rgb(38, 255, 0);
+    height: 250px;
+    width: 250px;
+    border-radius: 16px;
+}
+
+.sct5{
+    background-color: rgb(255, 0, 251);
+    border-radius: 16px;
+    width:250px;
+    height: 250px;
+    /**grid-column-start: 1;
+    grid-column-end: 4;***/
+}
+
+.sct6{
+    background-color: rgb(0, 255, 132);
+    border-radius: 16px;
+    width:250px;
+    height: 150px;
+}
+
+.sct7{
+    background-color: rgb(72, 0, 255);
+    border-radius: 16px;
+    width:250px;
+    height: 150px;
+}
+
+.sct8{
+    background-color: rgb(158, 68, 68);
+    border-radius: 16px;
+    width:250px;
+    height: 250px;
+}
+
+.sct9{
+    background-color: rgb(0, 204, 255);
+    height: 250px;
+    width: 250px;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="">logo</a></li>
+            <span>
+                <li><a href="" id="dashboard">Dashboard</a></li>
+                <li><a href="">YourTrips</a></li>              
+            </span>
+            <li class="hoverit"><img src="../../../assets/icons/icons_settings24.svg">
+                <ul class="dropdown">
+                    <!--  <li><a href="../signin/signin.html">Sign in</a></li>
+                    <li><a href="../signup/signup.html">Sign up</a></li>  -->
+                    <li><a href="../signin/signin.html">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="dashboardtemp">
+
+        <section class="sct1">
+           
+        </section>
+
+        <section class="sct2">
+
+        </section>
+
+        <section class="sct3">
+            
+        </section>
+
+        <section class="sct4">
+
+        </section>
+    </div>
+
+    <div class="dash3">
+        <section class="sct5">
+
+        </section>
+    </div>
+
+    <div class="dash2">
+
+
+        <section class="sct6">
+
+        </section>
+
+        <section class="sct7">
+            
+        </section>
+
+        <section class="sct8">
+            
+        </section>
+
+        <section class="sct9">
+            
+        </section>
+
+    </div>
+</body>
+</html>

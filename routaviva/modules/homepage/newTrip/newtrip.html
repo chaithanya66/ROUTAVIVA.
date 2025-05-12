@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="newtrip.css">
+</head>
+<body id="body">
+    <nav class="navbar">
+        <ul>
+            <li><img class="logoimg" src="../../../assets/images/WhatsApp_Image_2025-04-15_at_21.22.04_df1bfcaf-removebg-preview.png" alt=""></li>
+            <span>
+                <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+                <li><a href="" id="yourtrips">YourTrips</a></li>              
+            </span>
+            <li class="hoverit"><img src="../../../assets/icons/icons_settings24.svg">
+                <ul class="dropdown">
+                    <!--  <li><a href="../signin/signin.html">Sign in</a></li>
+                    <li><a href="../signup/signup.html">Sign up</a></li>  -->
+                    <li><a href="../signin/signin.html">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!--pop up-2-->
+    <div id="popup-2" class="popup-2">
+        <div class="croos1">
+            <span>Enter the Enroute Stops:</span><button id="toggleit1"><img src="../../../assets/icons/icons8-close.svg" alt=""></button>
+        </div>
+        <hr>
+        <div id="inputs1">
+            <div id="textfeild1"></div>
+            <div class="popupcont1">
+                <input type="text" placeholder="Enter the Enroute stops" id="text-1"><br>
+                <button id="button-011"><aside>Submit</aside><img src="../../../assets/images/icons8-add-24.png" alt=""></button>
+            </div>
+            
+        </div>
+    </div>
+
+<!--pop up-->
+
+<div id="popup" class="popup">
+    <div class="croos">
+        <span>Enter the mail id's:</span><button id="toggleit"><img src="../../../assets/icons/icons8-close.svg" alt=""></button>
+    </div>
+    <hr>
+    <div id="inputs">
+        <div id="textfeild"></div>
+        <div class="popupcont">
+            <input type="mail" placeholder="Enter the mail of colleagues" id="mailid-01"><br>
+            <button id="button-01"><aside>Submit</aside><img src="../../../assets/images/icons8-add-24.png" alt=""></button>
+        </div>
+    </div>
+</div>
+
+<!--Main content if not trip created-->
+    <main id="maintag">
+        <h3 id="displaytext">Start by creating a trip</h3>
+
+        <div class="cont-1">
+            <div class="container-1">
+                <div class="input-fields-1">
+                    <input type="text" name="" placeholder="Enter Start Destination" class="input-4" id="input-101">
+                    <input type="text" name="" placeholder="Enter End Destination" class="input-1" id="input-10">
+                </div>
+                <button id="button-start">Submit</button>
+            </div>
+            <div class="resultbox">
+                
+            </div>
+        </div><br>
+        <div class="cont">
+            <div class="container">
+    
+                <div class="input-fields">
+                    <input type="text" placeholder="Start data" class="input-2" id="input-11" onfocus="(this.type='date')">
+                    <input type="text" placeholder="End date" class="input-3" id="input-12" onfocus="(this.type='date')">
+                </div>
+                <button id="button">Submit</button>
+            </div>
+        </div><br>
+
+
+
+        <!-- <a href=""><img src="../../assets/images/icons8-arrow-64.png" alt="Select Trips"></a> --> 
+         <div class="cont-2">
+            <div class="container-2">
+                <button id="showpopup">Who will be on the trip</button>
+                <button id="button_02">Submit</button>
+            </div>
+         </div><br>
+
+         <div class="enroute">
+            <div class="enroute-cont">
+                <button id="enroutepop">enter enroute stops</button>
+                <button id="enroute-butt">Submit</button>
+            </div>
+         </div>
+        
+    </main>
+
+
+    <script src="newtrip.js" defer type="module"></script>
+
+</body>
+</html>

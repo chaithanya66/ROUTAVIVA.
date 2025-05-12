@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+HR+Lijeva:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+        #body {
+            background-color: white;
+        }
+
+        .container10 {
+            font-family: "Open Sans", serif;
+            height: auto;
+            width: 300px;
+            margin: 20vh auto;
+            display: flex;
+            background-color: #564e4e;
+            text-align: center;
+            box-shadow: 5px 5px 10px #000000;
+            padding: 20px;
+        }
+
+        .inputs {
+            text-align: center;
+            margin: 10vh auto;
+        }
+
+        #mailid {
+            outline: none;
+            padding: 8px 20px;
+            border-radius: 10px;
+            border: 1px solid #564e4e;
+            box-shadow: 5px 5px 10px #000000;
+        }
+
+        #button {
+            padding: 7px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: 2px solid #000000;
+            background: none;
+            mix-blend-mode: lighten;
+        }
+
+        #closetag {
+            background: none;
+            border-radius: 30px;
+            font-size: 25px;
+            height: 30px;
+            width: 30px;
+            border: 1px solid #000000;
+        }
+
+        ul li {
+            /* Bullet color */
+            color: red;
+            list-style-type: disc;
+        }
+
+        ul li span {
+            /* Text color */
+            color: black;
+        }
+
+        .budget-chart {
+            display: flex;
+            margin-top: 10px;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #eee;
+        }
+
+        .budget-spent {
+            background: #f4a261;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div class="container10">
+        <button id="closetag">&times;</button>
+        <div class="inputs">
+            <div id="textfeild"></div>
+            <input type="mail" name="" id="mailid"><br>
+            <button id="button"><img src="assets/images/addbut.png" alt=""></button>
+        </div>
+        <div id="para" onclick="change()">Enter the mails</div>
+    </div>
+
+    <ul>
+        <li><span>text</span></li>
+        <li><span>text</span></li>
+        <li><span>text</span></li>
+    </ul>
+    <div class="budget-chart">
+        <div class="budget-spent" style="width: 30%;">30%</div>
+        <div class="budget-left" style="width: 70%;">70%</div>
+    </div>
+
+    <script>
+        const submitbutton = document.getElementById("button");
+        const show = document.getElementById("textfeild");
+        const mailinput = document.getElementById("mailid");
+        let count = 0;
+        submitbutton.addEventListener('click', function () {
+            const inputs = mailinput.value;
+            const newtext = document.createElement("div");
+            newtext.textContent = inputs, count;
+            newtext.style.color = "white";
+            show.appendChild(newtext);
+            console.log(inputs);
+            newtext.style.marginBottom = "20px";
+            mailinput.value = "";
+            count++;
+            document.getElementById("para").innerHTML = `your traveling with ${count} persons`;
+        });
+
+        async function fetchtripid() {
+            try {
+                const response = await fetch('https://rutavivaunsecured-1.onrender.com/trip?tripId=c0d5def9-b110-4309-9434-8e531c493b4f', {
+                    headers: {
+                        'uid': 'da3d96ef-629f-4a29-9845-cde8b55d1ec1',
+                        'Content-Type': 'application/json',
+                        'X-API-Key': '',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                console.log(response);
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchtripid();
+
+        /***
+export async function tripstoinsert(user_id_export) {
+    try {
+        const response = await fetch(homepage_url, {
+            headers: {
+                'uid': user_id_export
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`Fetching error: ${response.status}`);
+        }
+        let placesvalue;
+        const res = await response.json();
+        const names = res.data.trips.map(trip => trip.name);
+        placesvalue=names;
+        console.log("places value: ",placesvalue);
+
+        const tripid=res.data.trips.map(trip=>trip.tripId);
+        console.log("Trip id's: ",tripid);
+
+        displayplaces(placesvalue);
+
+        console.log("insert trips: ", res.data.trips);
+    } catch (error) {
+        console.error(error);
+    }
+}
+function displayplaces(placesvalue){
+    const placesdis=document.getElementById("select-places");
+        
+        placesvalue.forEach(place => {
+            const optionplace=document.createElement("option");
+            optionplace.value=place;
+            optionplace.textContent=place;
+            placesdis.appendChild(optionplace);
+            optionplace.addEventListener('click',function(){
+                console.log("this is trip'id bro: " ,tripid);
+            });
+        });
+}
+tripstoinsert(user_id_export);
+***/
+
+
+
+
+
+        /***
+        let selectedTripId = null;
+        let tripData = [];
+        
+        export async function tripstoinsert(user_id_export) {
+            try {
+                const response = await fetch(homepage_url, {
+                    headers: {
+                        'uid': user_id_export
+                    }
+                });
+        
+                if (!response.ok) {
+                    throw new Error(`Fetching error: ${response.status}`);
+                }
+        
+                const res = await response.json();
+                tripData = res.data.trips;
+        
+                const reversedTrips = [...tripData].reverse();
+        
+                displayplaces(reversedTrips);
+                console.log("insert trips: ", tripData);
+        
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        
+        function displayplaces(trips) {
+            const placesSelect = document.getElementById("select-places");
+            placesSelect.innerHTML = "";
+        
+            trips.forEach(trip => {
+                const option = document.createElement("option");
+                option.value = trip.name;
+                option.textContent = trip.name;
+                option.dataset.tripid = trip.tripId;
+                placesSelect.appendChild(option);
+            });
+        
+            // Add change event listener to the <select>
+            placesSelect.addEventListener("change", function () {
+                const selectedOption = placesSelect.options[placesSelect.selectedIndex];
+                selectedTripId = selectedOption.dataset.tripid;
+                console.log("Selected tripId:", selectedTripId);
+                console.log(tripData);
+                async function fetchtripid() {
+                    try {
+                        const response = await fetch(`https://rutavivaunsecured-1.onrender.com/trip?tripId=${selectedTripId}`, {
+                            headers: {
+                                'uid': user_id_export,
+                                'Content-Type': 'application/json',
+                                'X-API-Key': '',
+                            }
+                        });
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+        
+                        console.log(response);
+                        const data = await response.json();
+                        console.log(data);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+                fetchtripid();
+            });
+        }
+        
+        tripstoinsert(user_id_export);
+        ***/
+
+
+        /***
+        function weather() {
+            const apikey = "28343841533e0bfe6709a4d3df077a6a";
+            const cityweather = "munnar";
+            const displaytemp = document.getElementsByClassName("tempvalue");
+            document.getElementById("citynamehtml").innerHTML = cityweather;
+            const displayweatherval = document.getElementsByClassName("weatherval");
+            const currenttime = Math.floor(Date.now() / 1000);
+        
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityweather}&appid=${apikey}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    const temperature = data.main.temp;
+                    if (displaytemp.length > 0) {
+                        const celsius = temperature - 273.15
+                        displaytemp[0].innerHTML = `${Math.round(celsius)}°C`;
+                    } console.log(data.name)
+                    console.log(data.main.temp)
+                    const weatherid = data.weather[0].id;
+                    const sunrise = data.sys.sunrise;
+                    const sunset = data.sys.sunset;
+                    console.log(sunrise);
+                    console.log(sunset);
+                    console.log(currenttime);
+                    if (weatherid >= 200 && weatherid < 300) {
+                        if (displayweatherval.length > 0) {
+                            displayweatherval[0].innerHTML = "Tunders";
+                        }
+                    }
+                    if (weatherid >= 300 && weatherid < 400) {
+                        if (displayweatherval.length > 0) {
+                            displayweatherval[0].innerHTML = "Rainy";
+                        }
+                    }
+                    if (weatherid >= 500 && weatherid < 600) {
+                        if (displayweatherval.length > 0) {
+                            displayweatherval[0].innerHTML = "Rain possible";
+                        }
+                    }
+                    if (weatherid >= 600 && weatherid < 700) {
+                        if (displayweatherval.length > 0) {
+                            displayweatherval[0].innerHTML = "Snow";
+                        }
+                    }
+                    if (weatherid >= 700 && weatherid < 800) {
+                        if (displayweatherval.length > 0) {
+                            displayweatherval[0].innerHTML = "Winds";
+                        }
+                    }
+                    if (weatherid > 800) {
+                        if (displayweatherval.length > 0) {
+                            if (currenttime >= sunrise && currenttime < sunset) {
+                                displayweatherval[0].innerHTML = "Sunny";
+                            } else {
+                                displayweatherval[0].innerHTML = "Clear Night";
+                            }
+                        }
+                    }
+                    console.log(data.weather[0].id);
+                })
+                .catch(error => console.error("error while searching", error));
+        }
+        weather();
+        
+        ***/
+
+
+
+        /***
+        let selectedTripId = null;
+        let selectedPlaceName = null;
+        let tripData = [];
+        
+        export async function tripstoinsert(user_id_export) {
+            try {
+                const response = await fetch(homepage_url, {
+                    headers: {
+                        'uid': user_id_export
+                    }
+                });
+        
+                if (!response.ok) {
+                    throw new Error(`Fetching error: ${response.status}`);
+                }
+        
+                const res = await response.json();
+                tripData = res.data.trips;
+        
+                const reversedTrips = [...tripData].reverse(); // Reverse to show bottom-to-top
+                // const reversedTrips = tripData; 
+                displayplaces(reversedTrips);
+        
+                console.log("insert trips: ", tripData);
+        
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        
+        function displayplaces(trips) {
+            const placesSelect = document.getElementById("select-places");
+            placesSelect.innerHTML = "";
+        
+            trips.forEach(trip => {
+                const option = document.createElement("option");
+                option.value = trip.name;
+                option.textContent = trip.name;
+                option.dataset.tripid = trip.tripId;
+                placesSelect.appendChild(option);
+            });
+        
+            placesSelect.addEventListener("change", function () {
+                const selectedOption = placesSelect.options[placesSelect.selectedIndex];
+                selectedTripId = selectedOption.dataset.tripid;
+                selectedPlaceName = selectedOption.value;
+        
+                console.log("Selected tripId:", selectedTripId);
+                console.log("Selected place name:", selectedPlaceName);
+        
+                async function fetchtripid() {
+                    try {
+                        const response = await fetch(`https://rutavivaunsecured-1.onrender.com/trip?tripId=${selectedTripId}`, {
+                            headers: {
+                                'uid': user_id_export,
+                                'Content-Type': 'application/json',
+                                'X-API-Key': '',
+                            }
+                        });
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+        
+                        console.log(response);
+                        const data = await response.json();
+                        console.log(data);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+                fetchtripid();
+        
+                /***async function mapscall(){
+                    try {
+                        const storedata=await fetchtripid().data;
+                        console.log("successbro: ",storedata);
+                    } catch (error) {
+                        console.log("error",error)
+                    }
+                }
+                mapscall();
+                
+        
+        
+                //weather fetching
+        
+                function weather() {
+                    const apikey = "28343841533e0bfe6709a4d3df077a6a";
+                    const cityweather = selectedPlaceName;
+                    const displaytemp = document.getElementsByClassName("tempvalue");
+                    document.getElementById("citynamehtml").innerHTML = cityweather;
+                    const displayweatherval = document.getElementsByClassName("weatherval");
+                    const currenttime = Math.floor(Date.now() / 1000);
+        
+                    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityweather}&appid=${apikey}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                            const temperature = data.main.temp;
+                            if (displaytemp.length > 0) {
+                                const celsius = temperature - 273.15
+                                displaytemp[0].innerHTML = `${Math.round(celsius)}°C`;
+                            } console.log(data.name)
+                            console.log(data.main.temp)
+                            const weatherid = data.weather[0].id;
+                            const sunrise = data.sys.sunrise;
+                            const sunset = data.sys.sunset;
+                            console.log(sunrise);
+                            console.log(sunset);
+                            console.log(currenttime);
+                            if (weatherid >= 200 && weatherid < 300) {
+                                if (displayweatherval.length > 0) {
+                                    displayweatherval[0].innerHTML = "Tunders";
+                                }
+                            }
+                            if (weatherid >= 300 && weatherid < 400) {
+                                if (displayweatherval.length > 0) {
+                                    displayweatherval[0].innerHTML = "Rainy";
+                                }
+                            }
+                            if (weatherid >= 500 && weatherid < 600) {
+                                if (displayweatherval.length > 0) {
+                                    displayweatherval[0].innerHTML = "Rain possible";
+                                }
+                            }
+                            if (weatherid >= 600 && weatherid < 700) {
+                                if (displayweatherval.length > 0) {
+                                    displayweatherval[0].innerHTML = "Snow";
+                                }
+                            }
+                            if (weatherid >= 700 && weatherid < 800) {
+                                if (displayweatherval.length > 0) {
+                                    displayweatherval[0].innerHTML = "Winds";
+                                }
+                            }
+                            if (weatherid > 800) {
+                                if (displayweatherval.length > 0) {
+                                    if (currenttime >= sunrise && currenttime < sunset) {
+                                        displayweatherval[0].innerHTML = "Sunny";
+                                    } else {
+                                        displayweatherval[0].innerHTML = "Clear Night";
+                                    }
+                                }
+                            }
+                            console.log(data.weather[0].id);
+                        })
+                        .catch(error => console.error("error while searching", error));
+                }
+                weather();
+        
+        
+            });
+        }
+        
+        tripstoinsert(user_id_export);
+        ***/
+
+        /***
+var ctx = document.getElementById('piechart').getContext('2d');
+var piechart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['petrol', 'food', 'stay', 'Entry fees'],
+        datasets: [{
+            label: 'Trip budget',
+            data: [10000, 2500, 5000, 1200],
+            backgroundColor: [
+                'rgb(8, 95, 87)',
+                'rgb(154, 235, 54)',
+                'rgba(255, 206, 86, 1)',
+                'rgb(63, 196, 198)',
+                // 'rgba(153, 102, 255, 0.2)',
+                // 'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgb(8, 95, 87)',
+                'rgb(154, 235, 54)',
+                'rgba(255, 206, 86, 1)',
+                'rgb(63, 196, 198)',
+                // 'rgba(153, 102, 255, 1)',
+                // 'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins:{
+            legend:{
+                labels:{
+                    usePointStyle: true,
+                    pointStyle: 'circle',
+                    boxWidth: 5,
+                    boxHeight:5,
+                    padding: 8
+                }
+            }
+        }
+        
+    }
+});
+***/
+
+    </script>
+
+</body>
+
+</html>

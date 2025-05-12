@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #changeit{
+            background-color: white;
+        }
+        .popup {
+            margin-top: 10px;
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 30vh auto;
+            background-color: #085f57;
+            display: block; /* Initially hidden */
+        }
+        .popup.active {
+            display: block; /* Show when active */
+        }
+        #inputs {
+            background-color: #085f57;
+            padding: 20px;
+        }
+        #inputs p {
+            font-size: 15px;
+            color: #ffe174;
+        }
+        #mailtosend {
+            background-color: #085f57;
+            border: none;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            outline: none;
+        }
+        #inputs button {
+            background-color: #ffe174;
+            width: 110px;
+            height: 30px;
+            cursor: pointer;
+            border-radius: 10px;
+            border: 0;
+        }
+        .flexit {
+            display: flex;
+        }
+        #inputs .flexit button {
+            margin-top: 10px;
+        }
+        #toggleit {
+            color: #085f57;
+            font-size: 30px;
+            margin-bottom: 2px;
+        }
+        .flexitt {
+            background-color: #ffe174;
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 350px;
+            cursor: pointer;
+            margin-top: 10px;
+        }#butt{
+            display: none;
+        }
+        #addanotheremail{
+            display: block;
+        }
+    </style>
+</head>
+<body id="changeit">
+    <button id="button-2">submit</button>
+    <div id="popup" class="popup">
+        <div class="flexitt">
+            <div id="toggleit">&times;</div>
+        </div>
+        
+        <div id="inputs">
+            <p id="para">Enter the number of colleague:</p>
+            <input type="text" id="noofmail">
+            <div class="flexit">
+                <button id="addanotheremail">Enter</button>
+            </div>
+            <button id="butt">Submit</button>
+        </div>
+    </div>
+    <h2 id="show"></h2>
+
+    <script>
+        const buttontag=document.getElementById("addanotheremail");
+        buttontag.addEventListener('click',function(){
+            const numberof=document.getElementById("noofmail").value;
+            const storeemail=[];
+            for(i=0;i<numberof;i++){
+                const input=document.createElement('input');
+                input.type='email';
+                input.name='emailEle';
+                input.placeholder='Enter email';
+                input.style.backgroundColor='#085f57';
+                input.style.border='none';
+                input.style.outline='none';
+                input.style.marginTop='20px';
+                let mails=document.getElementById("inputs").appendChild(input);
+                storeemail.push(input);
+                
+            }
+            document.getElementById("para").textContent="Enter the Email";
+            document.getElementById("butt").style.display='block';
+            document.getElementById("addanotheremail").style.display='none';
+
+            document.getElementById("butt").addEventListener('click',function(){
+                storeemail.forEach(storeEmails=>{
+                    console.log(storeEmails.value);
+                });
+            });
+        });
+        /***
+// Function to display results
+function display(resultplace) {
+    const resultbox = document.querySelector(".resultbox");
+    resultbox.innerHTML = "<ul>" + resultplace.map(list => `<li>${list}</li>`).join('') + "</ul>";
+
+    const allListItems = resultbox.querySelectorAll("li");
+    allListItems.forEach(item => {
+        item.addEventListener("click", () => {
+            selectInput(item.innerText);
+            storetripId(placesarray.trip.tripId);
+            console.log(placesarray.trip.tripId)
+        });
+    });
+}
+***/
+
+
+
+/***
+// Function to fetch places
+async function fetchplaces(store) {
+    try {
+        const response = await fetch("https://rutavivaunsecured-1.onrender.com/maps/searchPlace", {
+            method: "POST",
+            headers: {
+                uid: "fd00179a-de47-476a-b839-2b1364c4ed0d",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ place: store })
+        });
+
+        const data = await response.json();
+        let placearrayid = data.data.places;
+        console.log("Places fetched: ", placearrayid);
+
+        placesarray = placearrayid.map(placetext => placetext.mainText);
+        console.log("Places array: ", placesarray);
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+***/
+
+    </script>
+</body>
+</html>

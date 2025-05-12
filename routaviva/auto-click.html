@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <select id="mySelect">
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        <option value="4">Option 4</option>
+        <option value="5">Option 5</option>
+    </select>
+
+
+    <script>
+    
+        async function fetchroute() {
+            try {
+                const response = await fetch('https://rutavivaunsecured-1.onrender.com/maps/fetchDirections', {
+                    method:'POST',
+                    headers: {
+                        'uid': '56aa126a-23bd-43ec-96bb-f49ac1c82ceb',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "fromId": "ola-platform:3",
+                        "toId": "ola-platform:224"
+
+                    })
+                });
+                console.log(response.json());
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchroute();
+
+    </script>
+</body>
+
+</html>
