@@ -140,141 +140,109 @@ function displayplaces(trips, user_id_export) {
                 console.log(todestination);
 
                 // fetching route
-                let map; // Declare map variable globally
-let currentRouteLayer; // Store the route layer (polyline)
-let currentMarkers = []; // Store marker references
+                 // Declare map variable globally
+                let currentRouteLayer; // Store the route layer (polyline)
+                let currentMarkers = []; // Store marker references
 
-// Function to initialize or reset the map
-function initializeMap() {
-    // If the map is already initialized, we remove the current route layer and markers
-    if (map) {
-        map.eachLayer(function (layer) {
-            if (layer instanceof L.Marker || layer instanceof L.Polyline) {
-                map.removeLayer(layer); // Remove markers and polylines
-            }
-        });
-    } else {
-        // If map is not initialized yet, initialize the map
-        const mapContainer = document.getElementById('map');
-        mapContainer.innerHTML = ''; // Clear the map container
-        
-        console.log("Initializing map...");
-        map = L.map('map', {
-            center: [28.18369, 76.8197], // Set default center
-            zoom: 14
-        });
+                function initializeMap() {
+                    const container = L.DomUtil.get('map');
+                
+                    // Remove old map instance if it exists
+                    if (container != null && container._leaflet_id != null) {
+                        container._leaflet_id = null; // This forcibly clears Leaflet's internal reference
+                    }
+                
+                    console.log("Initializing map...");
+                
+                    const map = L.map('map', {
+                        center: [28.18369, 76.8197],
+                        zoom: 14
+                    });
+                
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+                
+                    return map;
+                }
+            
 
-        // Add OpenStreetMap tile layer
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-    }
-}
+                // Function to fetch route and update the map
+                async function fetchroute() {
+                    try {
+                        // Fetch route data
+                        const response1 = await fetch('https://rutavivaunsecured-1.onrender.com/maps/fetchDirections', {
+                            method: 'POST',
+                            headers: {
+                                'uid': user_id_export,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                "fromId": fromdestination,
+                                "toId": todestination
+                            })
+                        });
 
-// Function to show the initial route on the map
-function showInitialRoute() {
-    // Example of an initial route, you can modify this to fetch your default route
-    const initialRoute = {
-        fromLat: 28.18369,
-        fromLng: 76.8197,
-        toLat: 28.6139,
-        toLng: 77.2090,
-        polylineEncoded: 'encoded_polyline_here' // Put your encoded polyline here
-    };
+                        const data1 = await response1.json();
+                        console.log("resp: ", data1);
 
-    // Decode the polyline
-    const latlngs = polyline.decode(initialRoute.polylineEncoded).map(([lat, lng]) => [lat, lng]);
+                        const polylineEncoded = data1.data.routes[0].overview_polyline;
+                        console.log("fetching route: ", polylineEncoded);
 
-    // Add the initial route polyline
-    currentRouteLayer = L.polyline(latlngs, { color: 'blue' }).addTo(map);
+                        // Initialize map if it's not already initialized
+                        var mapWidget = initializeMap();
 
-    // Fit map to route
-    map.fitBounds(currentRouteLayer.getBounds());
+                        const apiKey = "N9AYMS4e2yoMzwjZ7c0CXg52EdpE6zqUVWo0kwfe"; // Replace with your API key
+                        const requestId = "XXX"; // Replace with a UUID or unique request ID
 
-    // Add initial markers for origin and destination
-    const originMarker = L.marker([initialRoute.fromLat, initialRoute.fromLng]).addTo(map).bindPopup("Origin").openPopup();
-    const destinationMarker = L.marker([initialRoute.toLat, initialRoute.toLng]).addTo(map).bindPopup("Destination");
+                        const from = document.getElementById('from').value;
+                        const to = document.getElementById('to').value;
 
-    // Store markers in the array
-    currentMarkers = [originMarker, destinationMarker];
-}
+                        const [fromLat, fromLng] = from.split(',').map(Number);
+                        const [toLat, toLng] = to.split(',').map(Number);
 
-// Function to fetch route and update the map
-async function fetchroute() {
-    try {
-        // Fetch route data
-        const response1 = await fetch('https://rutavivaunsecured-1.onrender.com/maps/fetchDirections', {
-            method: 'POST',
-            headers: {
-                'uid': user_id_export,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "fromId": fromdestination,
-                "toId": todestination
-            })
-        });
+                        const url = `https://api.olamaps.io/routing/v1/directions?origin=${fromLat},${fromLng}&destination=${toLat},${toLng}&api_key=${apiKey}`;
 
-        const data1 = await response1.json();
-        console.log("resp: ", data1);
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'X-Request-Id': requestId
+                            }
+                        });
 
-        const polylineEncoded = data1.data.routes[0].overview_polyline;
-        console.log("fetching route: ", polylineEncoded);
+                        const data = await response.json();
 
-        // Initialize map if it's not already initialized
-        initializeMap();
+                        if (data.status === "SUCCESS") {
+                            const latlngs = polyline.decode(polylineEncoded).map(([lat, lng]) => [lat, lng]);
 
-        const apiKey = "N9AYMS4e2yoMzwjZ7c0CXg52EdpE6zqUVWo0kwfe"; // Replace with your API key
-        const requestId = "XXX"; // Replace with a UUID or unique request ID
+                            // Remove the previous route polyline and markers
+                            if (currentRouteLayer) {
+                                mapWidget.removeLayer(currentRouteLayer); // Remove the old route
+                            }
+                            currentMarkers.forEach(marker => mapWidget.removeLayer(marker)); // Remove previous markers
+                            currentMarkers = []; // Clear the markers array
 
-        const from = document.getElementById('from').value;
-        const to = document.getElementById('to').value;
+                            // Add the new route polyline
+                            currentRouteLayer = L.polyline(latlngs, { color: 'blue' }).addTo(mapWidget);
 
-        const [fromLat, fromLng] = from.split(',').map(Number);
-        const [toLat, toLng] = to.split(',').map(Number);
+                            // Fit map to route
+                            mapWidget.fitBounds(currentRouteLayer.getBounds());
 
-        const url = `https://api.olamaps.io/routing/v1/directions?origin=${fromLat},${fromLng}&destination=${toLat},${toLng}&api_key=${apiKey}`;
+                            // Add origin and destination markers
+                            const originMarker = L.marker([fromLat, fromLng]).addTo(mapWidget).bindPopup("Origin").openPopup();
+                            const destinationMarker = L.marker([toLat, toLng]).addTo(mapWidget).bindPopup("Destination");
 
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'X-Request-Id': requestId
-            }
-        });
+                            // Store the new markers
+                            currentMarkers = [originMarker, destinationMarker];
 
-        const data = await response.json();
-
-        if (data.status === "SUCCESS") {
-            const latlngs = polyline.decode(polylineEncoded).map(([lat, lng]) => [lat, lng]);
-
-            // Remove the previous route polyline and markers
-            if (currentRouteLayer) {
-                map.removeLayer(currentRouteLayer); // Remove the old route
-            }
-            currentMarkers.forEach(marker => map.removeLayer(marker)); // Remove previous markers
-            currentMarkers = []; // Clear the markers array
-
-            // Add the new route polyline
-            currentRouteLayer = L.polyline(latlngs, { color: 'blue' }).addTo(map);
-
-            // Fit map to route
-            map.fitBounds(currentRouteLayer.getBounds());
-
-            // Add origin and destination markers
-            const originMarker = L.marker([fromLat, fromLng]).addTo(map).bindPopup("Origin").openPopup();
-            const destinationMarker = L.marker([toLat, toLng]).addTo(map).bindPopup("Destination");
-
-            // Store the new markers
-            currentMarkers = [originMarker, destinationMarker];
-
-            console.log("Map refreshed with new route.");
-        } else {
-            alert("Failed to fetch directions");
-        }
-    } catch (error) {
-        console.error("Error fetching route:", error);
-    }
-}
+                            console.log("Map refreshed with new route.");
+                        } else {
+                            alert("Failed to fetch directions");
+                        }
+                    } catch (error) {
+                        console.error("Error fetching route:", error);
+                    }
+                }
 
 
                 fetchroute();
